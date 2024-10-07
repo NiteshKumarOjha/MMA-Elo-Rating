@@ -12,6 +12,42 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/sortedByElo", async (req, res) => {
+  try {
+    // Fetch all fighters and sort them by eloRating in descending order
+    const fighters = await Fighter.find().sort({ eloRating: -1 });
+    res.status(200).json(fighters);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching fighters" });
+  }
+});
+
+router.get("/alphabetical", async (req, res) => {
+  try {
+    // Fetch all fighters and sort them by eloRating in descending order
+    const fighters = await Fighter.find().sort({ name: 1 });
+    res.status(200).json(fighters);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching fighters" });
+  }
+});
+
+router.get("/:fighterId", async (req, res) => {
+  try {
+    const fighterId = req.params.fighterId;
+    const fighter = await Fighter.findById(fighterId);
+    if (!fighter) {
+      return res.status(404).json({ message: "Fighter not found" });
+    }
+    res.json(fighter);
+  } catch (error) {
+    console.error(error); // Log the error for debugging purposes
+    res.status(500).json({ message: "Server error", error: error.message }); // Send structured error response
+  }
+});
+
 // Add a new fighter (for testing purposes)
 const generateUniqueFighterId = async () => {
   const count = await Fighter.countDocuments(); // Get current number of fighters
