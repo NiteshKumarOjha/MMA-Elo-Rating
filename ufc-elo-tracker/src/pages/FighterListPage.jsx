@@ -62,7 +62,7 @@ const FightersPage = () => {
       <input
         type="text"
         placeholder="Search for a fighter..."
-        className="mt-4 p-2 rounded bg-gray-800 text-white w-full md:w-1/2 mx-auto"
+        className="mt-10 p-2 rounded bg-gray-800 text-white w-full md:w-1/2 mx-auto"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

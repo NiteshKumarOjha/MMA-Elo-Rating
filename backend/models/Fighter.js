@@ -29,10 +29,19 @@ const fighterSchema = new mongoose.Schema({
     },
   ],
   fighter_id: {
-    // Add this field if it's needed
     type: Number,
     unique: true, // Set unique constraint if you want it to be unique
     required: true, // Mark as required if necessary
+  },
+  profileImage: {
+    // New field for profile image URL
+    type: String,
+    required: true, // Set to true if this field should be required
+  },
+  biography: {
+    // New field for biography text
+    type: String,
+    required: true, // Set to true if this field should be required
   },
 });
 

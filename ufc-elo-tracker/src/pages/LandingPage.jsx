@@ -24,7 +24,7 @@ const LandingPage = () => {
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col ">
       <main className="flex-grow mt-6">
-        <h2 className="text-3xl font-semibold text-center mt-4 text-white">
+        <h2 className="text-3xl font-semibold text-center mt-4 mb-8 text-white">
           Top Fighters (Ranked by ELO)
         </h2>
         {error && <p className="text-red-500 text-center">{error}</p>}
@@ -87,10 +87,6 @@ const LandingPage = () => {
           </table>
         </div>
       </main>
-
-      <footer className="bg-gray-800 text-center py-4">
-        <p className="text-gray-400">Footer content goes here</p>
-      </footer>
     </div>
   );
 };

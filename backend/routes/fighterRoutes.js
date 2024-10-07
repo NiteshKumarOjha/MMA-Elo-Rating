@@ -56,7 +56,7 @@ const generateUniqueFighterId = async () => {
 
 // Usage in your route
 router.post("/", async (req, res) => {
-  const { name, age, flag, record } = req.body;
+  const { name, age, flag, record, profileImage, biography } = req.body;
   const fighterId = await generateUniqueFighterId(); // Generate a unique fighter_id
   const newFighter = new Fighter({
     name,
@@ -64,6 +64,8 @@ router.post("/", async (req, res) => {
     flag,
     record,
     fighter_id: fighterId,
+    profileImage,
+    biography,
   });
   try {
     const fighter = await Fighter.findOne({ name });
