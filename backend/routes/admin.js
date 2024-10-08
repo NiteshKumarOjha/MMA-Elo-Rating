@@ -101,6 +101,7 @@ router.post("/addMatch", async (req, res) => {
 
     // Update fighter's ELO rating
     fighter.eloRating = newEloFighter;
+    fighter.eloHistory.push(newEloFighter);
 
     // Save match and fighter
     await match.save();

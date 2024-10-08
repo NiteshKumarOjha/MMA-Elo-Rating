@@ -43,6 +43,10 @@ const fighterSchema = new mongoose.Schema({
     type: String,
     required: true, // Set to true if this field should be required
   },
+  eloHistory: {
+    type: [Number], // Array of numbers to store ELO ratings
+    default: [2000], // Start with base ELO rating
+  },
 });
 
 module.exports = mongoose.model("Fighter", fighterSchema);
