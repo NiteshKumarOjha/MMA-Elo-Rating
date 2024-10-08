@@ -11,30 +11,26 @@ const calculateELO = (matches, initialRating = 2000) => {
     const {
       result, // 1 for win, 0 for loss, 0.5 for draw
       kd,
-      head,
-      body,
-      legs,
-      control,
+      sig,
       takedowns,
       takedownDefended,
       subAttempts,
       isChampionship,
       knockoutSub,
+      ksubloss,
     } = match;
 
     // Expected score calculation
-    const champPoints = result == 1 ? (isChampionship ? 50 : 0) : 0;
-    const kosub = knockoutSub == 1 ? 25 : 0;
-    const winPoints = result == 1 ? 50 : result == 0.5 ? 0 : -50;
-    const totalWPoints = champPoints + winPoints + kosub;
+    const champPoints = result == 1 ? (isChampionship == 1 ? 25 : 0) : 0;
+    const kwin = knockoutSub == 1 ? 25 : 0;
+    const winPoints = result == 1 ? 25 : result == 0.5 ? 0 : -25;
+    const kloss = ksubloss == 1 ? -25 : 0;
+    const totalWPoints = champPoints + winPoints + kwin + kloss;
 
     // Performance score calculation
     const performanceScore =
       15 * kd +
-      0.25 * head +
-      0.15 * body +
-      0.1 * legs +
-      1 * control +
+      0.2 * sig +
       2.5 * takedowns +
       2 * takedownDefended +
       2 * subAttempts;
@@ -60,14 +56,12 @@ router.post("/addMatch", async (req, res) => {
     isChampionship,
     result, // result should be 1 for win, 0 for loss
     kd,
-    head,
-    body,
-    legs,
-    control,
+    sig,
     takedowns,
     takedownDefended,
     subAttempts,
     knockoutSub,
+    ksubloss,
   } = req.body;
 
   try {
@@ -83,14 +77,12 @@ router.post("/addMatch", async (req, res) => {
       isChampionship,
       result,
       kd,
-      head,
-      body,
-      legs,
-      control,
+      sig,
       takedowns,
       takedownDefended,
       subAttempts,
       knockoutSub,
+      ksubloss,
     });
 
     // Get all matches for the fighter to calculate new ELO ratings

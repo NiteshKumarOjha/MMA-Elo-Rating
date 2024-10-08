@@ -8,6 +8,7 @@ import FighterPage from "./pages/FighterListPage";
 import FighterDetailsPage from "./pages/FighterDetailsPage";
 import AdminDashboard from "./components/AdminDashboard";
 import MatchManagement from "./components/MatchManagement";
+import FighterManagement from "./components/FighterManagement";
 
 function App() {
   return (
@@ -18,8 +19,8 @@ function App() {
         <Route path="/database" element={<FighterPage />} />
         <Route path="/database/:fighterId" element={<FighterDetailsPage />} />
         <Route path="/admin" element={<AdminDashboard />}>
-          <Route path="matches" element={<MatchManagement />} />{" "}
-          {/* Ensure this is correct */}
+          <Route path="matches" element={<MatchManagement />} />
+          <Route path="fighters" element={<FighterManagement />} />
         </Route>
       </Routes>
       <Footer />

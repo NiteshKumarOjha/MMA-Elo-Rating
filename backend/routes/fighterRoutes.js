@@ -79,4 +79,25 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Update an existing fighter
+router.put("/:fighterId", async (req, res) => {
+  const { name, age, flag, record, profileImage, biography } = req.body;
+  try {
+    const fighter = await Fighter.findByIdAndUpdate(
+      req.params.fighterId,
+      { name, age, flag, record, profileImage, biography },
+      { new: true, runValidators: true } // Return the updated document and validate it
+    );
+
+    if (!fighter) {
+      return res.status(404).json({ message: "Fighter not found" });
+    }
+
+    res.json(fighter);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: "Error updating fighter", error });
+  }
+});
+
 module.exports = router;

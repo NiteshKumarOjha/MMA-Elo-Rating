@@ -9,9 +9,8 @@ const matchSchema = new mongoose.Schema(
     },
 
     isChampionship: {
-      type: Boolean,
+      type: Number,
       required: true,
-      default: false,
     },
     result: {
       type: Number, // 1 for win, 0 for loss, 0.5 for draw
@@ -21,19 +20,7 @@ const matchSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    head: {
-      type: Number,
-      required: true,
-    },
-    body: {
-      type: Number,
-      required: true,
-    },
-    legs: {
-      type: Number,
-      required: true,
-    },
-    control: {
+    sig: {
       type: Number,
       required: true,
     },
@@ -50,6 +37,10 @@ const matchSchema = new mongoose.Schema(
       required: true,
     },
     knockoutSub: {
+      type: Number,
+      required: true, // 1 means yes 0 means no
+    },
+    ksubloss: {
       type: Number,
       required: true, // 1 means yes 0 means no
     },
