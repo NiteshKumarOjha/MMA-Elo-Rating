@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const cors = require("cors");
+const authRoutes = require("./routes/auth");
+const authMiddleware = require("./middleware/auth");
 
 // Load environment variables
 dotenv.config();
@@ -18,6 +20,11 @@ app.use(express.json());
 // Basic route for testing
 app.get("/", (req, res) => {
   res.send("API is running...");
+});
+
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", authMiddleware, (req, res) => {
+  res.json({ message: "Welcome to the admin dashboard" });
 });
 
 // Define API routes (we'll create these later)
